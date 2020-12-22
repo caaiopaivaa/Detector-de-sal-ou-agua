@@ -1,0 +1,24 @@
+// Incluir a biblioteca LCD:
+#include <LiquidCrystal.h>
+// Inicializar a biblioteca com os números dos pinos digitais
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+const int pot_solucao = 0; 
+int valor = 0;
+
+void setup() {
+ // Configurar o número de colunas e linhas do LCD:
+ lcd.begin(16, 2);
+ Serial.begin(9600);
+ // Texto a ser mostrado no LCD (texto fixo):
+ lcd.print("Condutividade:");
+}
+void loop() {
+ // Posicionar o cursor na coluna 0 e linha 1 (segunda linha):
+ lcd.setCursor(0, 1);
+ // Imprimir contagem de segundos decorridos:
+ valor = analogRead(pot_solucao);
+ valor = map(valor, 1023, 0, 0, 100);
+ lcd.print(valor);
+ lcd.print("%"); 
+ delay(100);
+}
